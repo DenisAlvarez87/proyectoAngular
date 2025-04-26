@@ -1,0 +1,105 @@
+<h1>Mi primer proyecto</h1>
+
+<ul>
+  <li *ngFor="let item of items()">{{ item.name }}</li>
+</ul>
+
+<h2>{{ 'Hola, Denis'.repeat(4) }}</h2>
+
+<p>Hola, soy {{ name }} y tengo, {{ edad }} años </p>
+
+<input [value]="name" type="text">
+
+<button [disabled]="disabled">click</button>
+<br>
+<br>
+<br>
+<img [src]="img">
+<br>
+<p>Hola, soy {{ objPersona.name }}, tengo {{ objPersona.edad }}, y mi avatar es...</p>
+<br>
+<br>
+<button (click)="funcionClick()">Pulsa</button>
+<br>
+<br>
+<button (dblclick)="funcionClick()">Pulsa Doble</button>
+<br>
+<br>
+<br>
+<p>(change)</p>
+<input [value]="objPersona.edad" type="number" (change)="funcionChange($event)">
+<br>
+<br>
+<br>
+<p>(keydown)</p>
+<input [value]="objPersona.name" type="text" (keydown)="keydownFuncion($event)">
+<br>
+<br>
+<p>(change)</p>
+<input [value]="objPersona.name" type="text" (change)="funcionChange($event)">
+<br>
+<br>
+<p>(keydown con enter)</p>
+<input [value]="objPersona.name" type="text" (keydown.enter)="funcionClick()">
+<br>
+<br>
+<br>
+<p>Single</p>
+<input [value]="nombreConSignal()" type="text" (keydown)="keydownFuncion($event)">
+<br>
+<p>Single que cambia: {{ nombreConSignal() }}</p>
+<br>
+<ul>
+  <p>Tamaño del array {{ items().length}}</p>
+  <li *ngFor="let item of items(); index as i">{{ i }} {{ item.name }}</li>
+</ul>
+<br>
+<br>
+<div *ngIf="1 === 1">
+  Mi Contenido
+</div>
+<br>
+<br>
+<br>
+<br>
+<div *ngIf="objPersona.name === 'Denis Alvarez' ">
+  Se cumple la condicion y renderizo!!!
+</div>
+<br>
+<br>
+<br>
+<br>
+<p>(change)</p>
+<input [value]="objPersonaConSignal().edad" type="number" (change)="funcionChangeEdad($event)">
+<br>
+<div *ngIf="objPersonaConSignal().name === 'Denis Alvarez' && objPersonaConSignal().edad > 18 else elseTemplate">
+  Soy Denis y soy mayor de 18 anos....
+</div>
+<!--es la manera de agregar un else.... Se le llama con el $=#elsetemplate (elseTemplate: puede tener cualquier nombre)y es el que se agg en el condicional if-->
+<ng-template #elseTemplate>
+  Soy Denis y soy menor de 18 anos....
+</ng-template>
+
+<br>
+<br>
+<br>
+<br>
+<!-- estructura ngSwitch -->
+<input [value]="objPersonaConSignal().name" type="text" (change)="funcionChangeNombre($event)">
+<div [ngSwitch]=" objPersonaConSignal().name">
+  <p *ngSwitchCase=" 'Denis' "> Soy Denis</p>
+  <p *ngSwitchCase=" 'Denis Alvarez' "> Soy Denis Alvarez</p>
+  <p *ngSwitchCase=" 'pp' "> Soy pp</p>
+  <p *ngSwitchDefault=" 'Denis Alvarez' "> No tengo nombre</p>
+
+</div>
+<br>
+<br>
+<br>
+<hr />
+<!--Esta forma maneja el control de evento, validaciones, etc-->
+<input type="color" [formControl]="colorCntrol">
+<p>Color: {{ colorCntrol.value }}</p>
+<br>
+<br>
+<br>

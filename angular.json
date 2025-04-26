@@ -3,17 +3,19 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "todoapp": {
+    "curso-angular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:class": {
           "skipTests": true
         },
         "@schematics/angular:component": {
-          "skipTests": true
+          "skipTests": true,
+          "standalone": true
         },
         "@schematics/angular:directive": {
-          "skipTests": true
+          "skipTests": true,
+          "standalone": true
         },
         "@schematics/angular:guard": {
           "skipTests": true
@@ -22,7 +24,8 @@
           "skipTests": true
         },
         "@schematics/angular:pipe": {
-          "skipTests": true
+          "skipTests": true,
+          "standalone": true
         },
         "@schematics/angular:resolver": {
           "skipTests": true
@@ -36,20 +39,18 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/todoapp",
+            "outputPath": "dist/curso-angular",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
@@ -61,21 +62,24 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "8kb",
+                  "maximumError": "16kb"
                 }
               ],
               "outputHashing": "all"
             },
             "development": {
+              "buildOptimizer": false,
               "optimization": false,
+              "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
@@ -84,16 +88,19 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "todoapp:build:production"
+              "browserTarget": "curso-angular:build:production"
             },
             "development": {
-              "buildTarget": "todoapp:build:development"
+              "browserTarget": "curso-angular:build:development"
             }
           },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n"
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "curso-angular:build"
+          }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
@@ -104,10 +111,8 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
@@ -117,5 +122,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "5519c442-fdd7-4282-94b8-ee0ec7a941ca"
   }
 }
