@@ -40,6 +40,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
+          "env": {
+            "NODE_VERSION": "20.x"
+          }
           "options": {
             "outputPath": "dist/curso-angular",
             "index": "src/index.html",
