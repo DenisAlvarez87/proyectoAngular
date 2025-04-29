@@ -3,19 +3,17 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "curso-angular": {
+    "todoapp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:class": {
           "skipTests": true
         },
         "@schematics/angular:component": {
-          "skipTests": true,
-          "standalone": true
+          "skipTests": true
         },
         "@schematics/angular:directive": {
-          "skipTests": true,
-          "standalone": true
+          "skipTests": true
         },
         "@schematics/angular:guard": {
           "skipTests": true
@@ -24,8 +22,7 @@
           "skipTests": true
         },
         "@schematics/angular:pipe": {
-          "skipTests": true,
-          "standalone": true
+          "skipTests": true
         },
         "@schematics/angular:resolver": {
           "skipTests": true
@@ -39,21 +36,20 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "env": {
-            "NODE_VERSION": "20.x"
-          }
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/curso-angular",
+            "outputPath": "dist/todoapp",
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
             ],
             "styles": [
               "src/styles.css"
@@ -65,24 +61,21 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "8kb",
-                  "maximumError": "16kb"
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
                 }
               ],
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -91,19 +84,16 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "curso-angular:build:production"
+              "buildTarget": "todoapp:build:production"
             },
             "development": {
-              "browserTarget": "curso-angular:build:development"
+              "buildTarget": "todoapp:build:development"
             }
           },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "curso-angular:build"
-          }
+          "builder": "@angular-devkit/build-angular:extract-i18n"
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
@@ -114,8 +104,10 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
             ],
             "styles": [
               "src/styles.css"
@@ -127,6 +119,6 @@
     }
   },
   "cli": {
-    "analytics": "5519c442-fdd7-4282-94b8-ee0ec7a941ca"
+    "analytics": false
   }
 }
